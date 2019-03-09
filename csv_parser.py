@@ -12,6 +12,7 @@ class Column:
 TMP_req_heads = ["ts", "Depth"]
 TMP_file_name = 'LD600.csv'
 
+
 def get_headers_indexes(input_headers, requered_headers):
     headers = input_headers.split(";")
 
@@ -46,16 +47,8 @@ def fill_in_data(file_name, wanted_heads):
         return array_of_Columns
 
 
-
 def main():
     line_of_Parameters = fill_in_data(TMP_file_name, TMP_req_heads)
-
-    print(42)
-
-        # for line in file.readlines():
-            # for word in line.split(";"):
-                # print(word)
-
 
 
 if __name__ == "__main__":

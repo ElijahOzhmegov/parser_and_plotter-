@@ -1,26 +1,26 @@
-class Parameter:
-    def __init__(self, name, axe_type):
-        self.name     = name
-        self.axe_type = axe_type
+str_path = "path"
 
-class Graph:
-    def __init__(self):
-        self.xlabel = ""
-        self.ylabel = ""
+def search_for_path(file):
+    for line in file.readlines():
+        words = line.split("=")
 
-    def add_xlabel(self, xlabel):
-        self.xlabel = xlabel
+        for word in words:
+            uncluttered_word = word.replace(" ", "")
 
-    def add_ylabel(self, ylabel):
-        self.ylabel = ylabel
+            if uncluttered_word == str_path:
+                path = words[1].split("\"")
+                return path[1]
 
-
-key_words = {"Xname": "Xname", "Yname": "Yname"}
 
 def main():
     file = open("csv_config.config")
 
-    read(file)
+    path = search_for_path(file)
+
+    with open(path) as csv_file:
+        print(csv_file.readline())
+    print(path)
+
     file.close()
 
 if __name__ == "__main__":

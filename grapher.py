@@ -5,14 +5,14 @@ import matplotlib.dates as mdates
 from datetime import datetime
 
 def conv_24h(timestamp):
-    dt = datetime.fromtimestamp(timestamp / (10 ** 6))
+    dt = datetime.fromtimestamp(timestamp / (10 ** 6)) # convert to lambda function
     return dt
 
 def draw(Xparam, Yparam):
     Xdata = [(conv_24h(int(val))) for val in Xparam.data]
     Ydata = [float(val) for val in Yparam.data]
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots() # make wider
     ax.plot(Xdata, Ydata)
 
     h_fmt = mdates.DateFormatter('%H:%M:%S')
