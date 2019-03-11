@@ -55,13 +55,34 @@ def going_via_file(file_lines):
     return 0, 0
 
 def parse_file(file_name):
-    with open(TMP_file_name) as file:
+    with open(file_name) as file:
         file_lines = file.readlines()
         path, array_of_graphs = going_via_file(file_lines)
+
+        return path, array_of_graphs
+
+
+def extract_headers(array_of_graphs):
+    required_headers = []
+
+    for graph in array_of_graphs:
+
+        if graph.Xname not in required_headers:
+            required_headers.append(graph.Xname)
+
+        for Yname in graph.Ynames:
+            if Yname not in required_headers:
+                required_headers.append(Yname)
+
+    return required_headers
+
 
 def main():
     TMP_file_name = "csv_config.config"
     path, array_of_graphs = parse_file(TMP_file_name)
+
+    required_heads = extract_headers(array_of_graphs)
+    print(required_heads)
 
 
 if __name__ == "__main__":
