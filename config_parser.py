@@ -1,5 +1,6 @@
 import os
 
+
 class Graph:
     def __init__(self):
         self.name = ''
@@ -8,43 +9,60 @@ class Graph:
         self.Ynames = []
 
 
-def searching_for(key, file):
-    while True:
-        line = file.readline()
+def extracting_meaning(sentence):
+    words = sentence.split("\"")
+    return words[1]
+
+
+def extracting_data(file_lines):
+    array_of_graphs = []
+    path = "Empty"
+
+    for line in file_lines:
         words = line.split("=")
 
-        for word in words:
-            uncluttered_word = word.replace(" ", "")
+        clear_word = words[0].replace(" ", "")
 
-            if uncluttered_word == key:
-                path = words[1].split("\"")
-                return path[1]
+        if clear_word == "Graph":
+            bubble = Graph()
+            array_of_graphs.append(bubble)
+            bubble.name = extracting_meaning(words[1])
 
-    return 0
+        elif clear_word == "Xaxis":
+            bubble.Xname = extracting_meaning(words[1])
+
+        elif clear_word == "Yaxis":
+            bubble.Ynames.append(extracting_meaning(words[1]))
+
+        elif clear_word == "path":
+            path = extracting_meaning(words[1])
+
+    return path, array_of_graphs
 
 
-def scanning_for_graph_data(file):
-    print(file.readlines())
+def going_via_file(file_lines):
+    path, array_of_graphs = extracting_data(file_lines)
 
-def main():
-    file = open("csv_config.config")
-
-    path = searching_for("path", file)
-
-    if path == 0:
+    if path == "Empty":
         print("Unfortunately variable \"path\" was not defined!")
         print("Make sure that variable \"path\" was written correct.")
-    elif os.path.isfile(path):
-
-        scanning_for_graph_data(file)
-
-        with open(path) as csv_file:
-            print(csv_file.readline())
-        print(path)
     else:
-        print("Unfortunately defined path: \"" + path + "\" does not exist!")
+        if not os.path.isfile(path):
+            print("Unfortunately defined path: \"" + path + "\" does not exist!")
+        else:
+            return path, array_of_graphs
 
-    file.close()
+    return 0, 0
+
+def parse_file(file_name):
+    with open(TMP_file_name) as file:
+        file_lines = file.readlines()
+        path, array_of_graphs = going_via_file(file_lines)
+
+def main():
+    TMP_file_name = "csv_config.config"
+    path, array_of_graphs = parse_file(TMP_file_name)
+
 
 if __name__ == "__main__":
     main()
