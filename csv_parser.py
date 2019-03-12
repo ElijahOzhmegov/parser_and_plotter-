@@ -8,6 +8,9 @@ class Column:
     def expand_data(self, number):
         self.data.append(number)
 
+    def __copy__(self):
+        pass
+
 
 TMP_req_heads = ["ts", "Depth"]
 TMP_file_name = 'LD600.csv'

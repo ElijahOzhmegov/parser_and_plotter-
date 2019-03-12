@@ -8,10 +8,12 @@ TMP_cnf_file = "csv_config.config"
 
 def main():
     path, array_of_graphs = cnf_pr.parse_file(TMP_cnf_file)
-    line_of_Parameters = csv_pr.fill_in_data(path, TMP_req_heads)
 
-    gr.draw(line_of_Parameters[0], line_of_Parameters[2])
-    gr.draw(line_of_Parameters[0], line_of_Parameters[3])
+    required_heads = cnf_pr.extract_headers(array_of_graphs)
+
+    line_of_Parameters = csv_pr.fill_in_data(path, required_heads)
+
+    gr.draw(array_of_graphs, line_of_Parameters)
 
     print("Success!")
 
