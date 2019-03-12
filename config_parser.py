@@ -23,7 +23,7 @@ def extracting_data(file_lines):
 
         clear_word = words[0].replace(" ", "")
 
-        if clear_word == "Graph":
+        if clear_word == "Graph": # Maybe it should be placed in variables?
             bubble = Graph()
             array_of_graphs.append(bubble)
             bubble.name = extracting_meaning(words[1])
@@ -43,7 +43,7 @@ def extracting_data(file_lines):
 def going_via_file(file_lines):
     path, array_of_graphs = extracting_data(file_lines)
 
-    if path == "Empty":
+    if path == "Empty": # perhaps the lines should be replaced or just placed in variables?
         print("Unfortunately variable \"path\" was not defined!")
         print("Make sure that variable \"path\" was written correct.")
     else:

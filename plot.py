@@ -2,8 +2,6 @@ import csv_parser    as csv_pr
 import config_parser as cnf_pr
 import grapher       as gr
 
-TMP_req_heads = ["ts", "Vx", "Depth", "Pitch"]
-TMP_file_name = 'LD600.csv'
 TMP_cnf_file = "csv_config.config"
 
 def main():

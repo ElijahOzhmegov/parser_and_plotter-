@@ -42,7 +42,7 @@ def fill_in_data(file_name, wanted_heads):
 
         for line in file.readlines():
             words = line.split(";")
-            if len(words) > 1:  # fix me
+            if len(words) > 1:  # fix me, obvious, it is a wrong way, idk how at least now
                 for one_Column in array_of_Columns:
                     i = one_Column.index
                     one_Column.expand_data(words[i])

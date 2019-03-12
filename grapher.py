@@ -1,24 +1,25 @@
 from datetime import datetime
 
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import csv_parser as csv_pr
 import numpy as np
-import matplotlib.dates as mdates
 
 
 def conv_24h(timestamp):
-    dt = datetime.fromtimestamp(timestamp / (10 ** 6)) # convert to lambda function
+    dt = datetime.fromtimestamp(timestamp / (10 ** 6)) # convert to lambda function?
     return dt
 
 
-def draw2(name, Xparam, Yparams):
+def draw2(name, Xparam, Yparams): # make legend output? # make saving line charts as png files?
     fig = plt.figure(figsize=(16, 9))
     ax = fig.add_subplot(111)
 
     xlabel = Xparam.name
     ylabel = ""
 
-    Xdata = [(conv_24h(int(val))) for val in Xparam.data]
+    Xdata = [(conv_24h(int(val))) for val in Xparam.data] # Xdata is not always "datatime"?
+
     for Yparam in Yparams:
         Ydata = [float(val) for val in Yparam.data]
         ylabel = ylabel + " " + Yparam.name
@@ -30,7 +31,7 @@ def draw2(name, Xparam, Yparams):
 
     h_fmt = mdates.DateFormatter('%H:%M:%S')
     ax.xaxis.set_major_formatter(h_fmt)
-    _ = plt.xticks(rotation=30)
+    _ = plt.xticks(rotation=40)
 
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
@@ -39,7 +40,6 @@ def draw2(name, Xparam, Yparams):
 
 
 def draw(array_of_graphs, line_of_Parameters):
-
 
     for graph in array_of_graphs:
         name = graph.name
